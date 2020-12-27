@@ -1,0 +1,27 @@
+.product-col {
+    display: table;
+    margin-bottom: 19px;
+  }
+  .product-col img {
+    display: table-cell;
+    vertical-align: middle;
+    float: left;
+    width: 150px;
+  }
+  .product-col .pc-title {
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 30px;
+  }
+  .product-col .pc-title h4 {
+    font-size: 16px;
+    color: #414141;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+  .product-col .pc-title p {
+    margin-bottom: 0;
+    font-size: 16px;
+    color: #414141;
+  }
+
