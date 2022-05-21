@@ -9,8 +9,8 @@ use Validator;
 use Auth;
 
 class AuthController extends Controller
-{ 
-    
+{
+
     public function login(Request $request)
     {
         $request->validate([
@@ -27,17 +27,17 @@ class AuthController extends Controller
             ], 401);
 
         $success['token'] = $request->user()->createToken('MyApp')->accessToken;
-        
+
         return response()->json(['success' => $success]);
-       
+
     }
-    
+
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|confirmed|min:6',
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
 
         if ($validator->fails()) {
@@ -52,7 +52,7 @@ class AuthController extends Controller
 
         return response()->json(['success' => $success]);
     }
-    
+
     /**
      * Logout admin (Revoke the token)
      *
@@ -61,14 +61,14 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $user = $request->user('api');
-        
+
         $user->token()->revoke();
 
         return response()->json([
             'message' => 'Successfully logged out'
         ]);
-    }  
-    
+    }
+
 
     public function loggedUser(Request $request) {
         return response()->json(['data' => $request->user('api')]);
