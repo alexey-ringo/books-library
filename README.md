@@ -4,7 +4,7 @@
 
 ## Демо
 
-Доступна [демо-версия проекта https://4pixels.phpecommerce.ru](https://4pixels.phpecommerce.ru).
+Доступна [демо-версия проекта https://books-library.phpecommerce.ru/](https://books-library.phpecommerce.ru).
 
 - Зарегистрированный пользователь имеет возможность добавлять книги и редактировать свои
 - 
