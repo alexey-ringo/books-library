@@ -119,9 +119,9 @@
         for(let key in errors) {
           console.log(key);
           console.log(errors[key]);
-          errors[key].forEach(function(item){
-            result += item + '; ';
-          });
+          // errors[key].forEach(function(item){
+          //   result += item + '; ';
+          // });
         }
         return result;
       },
