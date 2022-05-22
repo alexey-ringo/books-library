@@ -101,6 +101,7 @@
                         }
                         if(error.response.data.error) {
                             // swal('Ошибка - ' + error.response.status, this.errMessageToStr(error.response.data.error), "error");
+                          this.errMessageToStr(error.response.data.error);
                             this.$emit("changelogin", 1);
                             this.$router.go(-1);
                         }
