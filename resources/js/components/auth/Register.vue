@@ -86,19 +86,6 @@
                             this.$router.go(-1);
                         }
                     }
-                    else if(response.data.error) {
-                        let validationError = '';
-                        if(response.data.error.name) {
-                            validationError = response.data.error.name[0] + '; ';
-                        }
-                        if(response.data.error.email) {
-                            validationError += response.data.error.email[0] + '; ';
-                        }
-                        if(response.data.error.password) {
-                            validationError += response.data.error.password[0] + '; ';
-                        }
-                        swal('Ошибка вылидации', validationError, "error");
-                    }
                     else {
                         swal("Ошибка", "Нет ответа от сервера при попытке войти в систему", "error");
                         this.$emit("changelogin", 1);
@@ -111,6 +98,23 @@
                             swal('Ошибка - ' + error.response.status, error.response.data.message, "error");
                             this.$emit("changelogin", 1);
                             this.$router.go(-1);
+                        }
+                        else if(error.response.data.errors) {
+                          let validationError = '';
+                          if(error.response.data.errors.name && error.response.data.errors.name.length
+                              && error.response.data.errors.name.length > 0) {
+                              validationError = error.response.data.errors.name[0] + '; ';
+                          }
+                          if(error.response.data.errors.email && error.response.data.errors.email.length
+                              && error.response.data.errors.email.length > 0) {
+                            validationError = error.response.data.errors.email[0] + '; ';
+                          }
+                          if(error.response.data.errors.password && error.response.data.errors.password.length
+                              && error.response.data.errors.password > 0) {
+                            validationError = error.response.data.errors.name[0] + '; ';
+                          }
+                          swal('Ошибка вылидации', validationError, "error");
+
                         }
                     }
                     else {
