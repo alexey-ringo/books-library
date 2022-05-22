@@ -100,8 +100,6 @@
                             this.$router.go(-1);
                         }
                         if(error.response.data.error) {
-                          console.log(error.response.data.error);
-                          console.log(this.errMessageToStr(error.response.data.error));
                             // swal('Ошибка - ' + error.response.status, this.errMessageToStr(error.response.data.error), "error");
                             this.$emit("changelogin", 1);
                             this.$router.go(-1);
@@ -118,6 +116,8 @@
       errMessageToStr(errors) {
         let result = '';
         for(let key in errors) {
+          console.log(key);
+          console.log(errors[key]);
           errors[key].forEach(function(item){
             result += item + '; ';
           });
