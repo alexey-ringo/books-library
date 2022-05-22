@@ -100,8 +100,17 @@
                             this.$router.go(-1);
                         }
                         if(error.response.data.error) {
-                            // swal('Ошибка - ' + error.response.status, this.errMessageToStr(error.response.data.error), "error");
-                          this.errMessageToStr(error.response.data.error);
+                            let validationError = '';
+                            if(error.response.data.error.name) {
+                                validationError = error.response.data.error.name[0] + '; ';
+                            }
+                            if(error.response.data.error.email) {
+                                validationError += error.response.data.error.email[0] + '; ';
+                            }
+                            if(error.response.data.error.password) {
+                                validationError += error.response.data.error.password[0] + '; ';
+                            }
+                            swal('Ошибка - ' + error.response.status, validationError, "error");
                             this.$emit("changelogin", 1);
                             this.$router.go(-1);
                         }
@@ -114,16 +123,5 @@
                 });
             }
         },
-      errMessageToStr(errors) {
-        let result = '';
-        for(let key in errors) {
-          console.log(key);
-          console.log(errors[key]);
-          // errors[key].forEach(function(item){
-          //   result += item + '; ';
-          // });
-        }
-        return result;
-      },
     }
 </script>
