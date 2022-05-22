@@ -94,6 +94,7 @@
                 })
                 .catch(error => {
                     if(error.response) {
+                      console.log(error.response.data.errors.email);
                         if(error.response.data.message) {
                             swal('Ошибка - ' + error.response.status, error.response.data.message, "error");
                             this.$emit("changelogin", 1);
@@ -117,11 +118,11 @@
 
                         }
                     }
-                    else {
-                        swal('Ошибка', "Внутренняя ошибка сервера", "error");
-                        this.$emit("changelogin", 1);
-                        this.$router.go(-1);
-                    }
+                    // else {
+                    //     swal('Ошибка', "Внутренняя ошибка сервера", "error");
+                    //     this.$emit("changelogin", 1);
+                    //     this.$router.go(-1);
+                    // }
                 });
             }
         },
