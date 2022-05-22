@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginAuthRequest;
+use App\Http\Requests\RegisterAuthRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Validator;
@@ -11,20 +13,14 @@ use Auth;
 class AuthController extends Controller
 {
 
-    public function login(Request $request)
+    public function login(LoginAuthRequest $request)
     {
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-            //'remember_me' => 'boolean'
-        ]);
+        if(!Auth::attempt($request->validated())) {
 
-        $credentials = request(['email', 'password']);
-
-        if(!Auth::attempt($credentials))
             return response()->json([
                 'message' => 'Unauthorized'
             ], 401);
+        }
 
         $success['token'] = $request->user()->createToken('MyApp')->accessToken;
 
@@ -32,19 +28,9 @@ class AuthController extends Controller
 
     }
 
-    public function register(Request $request)
+    public function register(RegisterAuthRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 422);
-        }
-
-        $input = $request->all();
+        $input = $request->validated();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
         $success['token'] = $user->createToken('MyApp')->accessToken;
@@ -68,7 +54,6 @@ class AuthController extends Controller
             'message' => 'Successfully logged out'
         ]);
     }
-
 
     public function loggedUser(Request $request) {
         return response()->json(['data' => $request->user('api')]);
