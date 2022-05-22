@@ -94,17 +94,18 @@
                 })
                 .catch(error => {
                     if(error.response) {
-                      console.log(error.response);
                         if(error.response.data.message) {
                             swal('Ошибка - ' + error.response.status, error.response.data.message, "error");
                             this.$emit("changelogin", 1);
                             this.$router.go(-1);
                         }
-                        // if(error.response.data.error) {
-                        //     swal('Ошибка - ' + error.response.status, this.errMessageToStr(error.response.data.error), "error");
-                        //     this.$emit("changelogin", 1);
-                        //     this.$router.go(-1);
-                        // }
+                        if(error.response.data.error) {
+                          console.log(error.response.data.error);
+                          console.log(this.errMessageToStr(error.response.data.error));
+                            // swal('Ошибка - ' + error.response.status, this.errMessageToStr(error.response.data.error), "error");
+                            this.$emit("changelogin", 1);
+                            this.$router.go(-1);
+                        }
                     }
                     else {
                         swal('Ошибка', "Внутренняя ошибка сервера", "error");
