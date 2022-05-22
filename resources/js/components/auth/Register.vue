@@ -86,6 +86,19 @@
                             this.$router.go(-1);
                         }
                     }
+                    else if(error.response.data.error) {
+                        let validationError = '';
+                        if(error.response.data.error.name) {
+                            validationError = error.response.data.error.name[0] + '; ';
+                        }
+                        if(error.response.data.error.email) {
+                            validationError += error.response.data.error.email[0] + '; ';
+                        }
+                        if(error.response.data.error.password) {
+                            validationError += error.response.data.error.password[0] + '; ';
+                        }
+                        swal('Ошибка - ' + error.response.status, validationError, "error");
+                    }
                     else {
                         swal("Ошибка", "Нет ответа от сервера при попытке войти в систему", "error");
                         this.$emit("changelogin", 1);
@@ -98,19 +111,6 @@
                             swal('Ошибка - ' + error.response.status, error.response.data.message, "error");
                             this.$emit("changelogin", 1);
                             this.$router.go(-1);
-                        }
-                        if(error.response.data.error) {
-                            let validationError = '';
-                            if(error.response.data.error.name) {
-                                validationError = error.response.data.error.name[0] + '; ';
-                            }
-                            if(error.response.data.error.email) {
-                                validationError += error.response.data.error.email[0] + '; ';
-                            }
-                            if(error.response.data.error.password) {
-                                validationError += error.response.data.error.password[0] + '; ';
-                            }
-                            swal('Ошибка - ' + error.response.status, validationError, "error");
                         }
                     }
                     else {
