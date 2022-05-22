@@ -111,8 +111,6 @@
                                 validationError += error.response.data.error.password[0] + '; ';
                             }
                             swal('Ошибка - ' + error.response.status, validationError, "error");
-                            this.$emit("changelogin", 1);
-                            this.$router.go(-1);
                         }
                     }
                     else {
