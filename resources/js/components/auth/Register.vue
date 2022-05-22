@@ -86,18 +86,18 @@
                             this.$router.go(-1);
                         }
                     }
-                    else if(error.response.data.error) {
+                    else if(response.data.error) {
                         let validationError = '';
-                        if(error.response.data.error.name) {
-                            validationError = error.response.data.error.name[0] + '; ';
+                        if(response.data.error.name) {
+                            validationError = response.data.error.name[0] + '; ';
                         }
-                        if(error.response.data.error.email) {
-                            validationError += error.response.data.error.email[0] + '; ';
+                        if(response.data.error.email) {
+                            validationError += response.data.error.email[0] + '; ';
                         }
-                        if(error.response.data.error.password) {
-                            validationError += error.response.data.error.password[0] + '; ';
+                        if(response.data.error.password) {
+                            validationError += response.data.error.password[0] + '; ';
                         }
-                        swal('Ошибка - ' + error.response.status, validationError, "error");
+                        swal('Ошибка вылидации', validationError, "error");
                     }
                     else {
                         swal("Ошибка", "Нет ответа от сервера при попытке войти в систему", "error");
