@@ -41,7 +41,6 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            dd($validator->errors());
             return response()->json(['error' => $validator->errors()], 422);
         }
 
