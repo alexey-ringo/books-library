@@ -93,8 +93,8 @@
                     }
                 })
                 .catch(error => {
+                  console.log(error);
                     if(error.response) {
-                      console.log(error.response);
                         // if(error.response.data.message) {
                         //     swal('Ошибка - ' + error.response.status, error.response.data.message, "error");
                         //     this.$emit("changelogin", 1);
