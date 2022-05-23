@@ -78,8 +78,6 @@
                     password_confirmation: this.password_confirmation
                 })
                 .then((response) => {
-                  console.log(response);
-                  console.log('then');
                     if(response.data.success) {
                         localStorage.setItem('user',response.data.success.name)
                         localStorage.setItem('jwt',response.data.success.token)
@@ -95,32 +93,27 @@
                     }
                 })
                 .catch(error => {
-                  console.log(error);
-                  console.log('catch');
                     if(error.response) {
-                      console.log(error.response);
-                      console.log('catch-response');
+                        if(error.response.data.errors) {
+                          let validationError = '';
+                          if(error.response.data.errors.name && error.response.data.errors.name.length
+                              && error.response.data.errors.name.length > 0) {
+                              validationError = error.response.data.errors.name[0] + '; ';
+                          }
+                          if(error.response.data.errors.email && error.response.data.errors.email.length
+                              && error.response.data.errors.email.length > 0) {
+                            validationError = error.response.data.errors.email[0] + '; ';
+                          }
+                          if(error.response.data.errors.password && error.response.data.errors.password.length
+                              && error.response.data.errors.password > 0) {
+                            validationError = error.response.data.errors.name[0] + '; ';
+                          }
+                          swal('Ошибка вылидации', validationError, "error");
+                        }
                         // if(error.response.data.message) {
                         //     swal('Ошибка - ' + error.response.status, error.response.data.message, "error");
-                        //     this.$emit("changelogin", 1);
-                        //     this.$router.go(-1);
-                        // }
-                        // else if(error.response.data.errors) {
-                        //   let validationError = '';
-                        //   if(error.response.data.errors.name && error.response.data.errors.name.length
-                        //       && error.response.data.errors.name.length > 0) {
-                        //       validationError = error.response.data.errors.name[0] + '; ';
-                        //   }
-                        //   if(error.response.data.errors.email && error.response.data.errors.email.length
-                        //       && error.response.data.errors.email.length > 0) {
-                        //     validationError = error.response.data.errors.email[0] + '; ';
-                        //   }
-                        //   if(error.response.data.errors.password && error.response.data.errors.password.length
-                        //       && error.response.data.errors.password > 0) {
-                        //     validationError = error.response.data.errors.name[0] + '; ';
-                        //   }
-                        //   swal('Ошибка вылидации', validationError, "error");
-                        //
+                        //     // this.$emit("changelogin", 1);
+                        //     // this.$router.go(-1);
                         // }
                     }
                     // else {
