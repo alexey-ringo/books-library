@@ -29,7 +29,7 @@ class AuthController extends Controller
     }
 
     public function register(RegisterAuthRequest $request)
-    {
+    {dd(1);
         $input = $request->validated();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
