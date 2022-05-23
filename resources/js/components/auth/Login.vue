@@ -83,7 +83,7 @@
                           }
                           if (error.response.data.errors.password && error.response.data.errors.password.length
                               && error.response.data.errors.password > 0) {
-                            validationError = error.response.data.errors.name[0] + '; ';
+                            validationError = error.response.data.errors.password[0] + '; ';
                           }
                           swal('Ошибка вылидации', validationError, "error");
                         }
