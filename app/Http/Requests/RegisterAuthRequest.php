@@ -39,10 +39,10 @@ class RegisterAuthRequest extends FormRequest
         ];
     }
 
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(
-            new JsonResponse($validator->messages(), 422)
-        );
-    }
+//    protected function failedValidation(Validator $validator)
+//    {
+//        throw new HttpResponseException(
+//            new JsonResponse($validator->messages(), 422)
+//        );
+//    }
 }

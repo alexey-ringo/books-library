@@ -78,6 +78,8 @@
                     password_confirmation: this.password_confirmation
                 })
                 .then((response) => {
+                  console.log(response);
+                  console.log('then');
                     if(response.data.success) {
                         localStorage.setItem('user',response.data.success.name)
                         localStorage.setItem('jwt',response.data.success.token)
@@ -94,7 +96,10 @@
                 })
                 .catch(error => {
                   console.log(error);
+                  console.log('catch');
                     if(error.response) {
+                      console.log(error.response);
+                      console.log('catch-response');
                         // if(error.response.data.message) {
                         //     swal('Ошибка - ' + error.response.status, error.response.data.message, "error");
                         //     this.$emit("changelogin", 1);
